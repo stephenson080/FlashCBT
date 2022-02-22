@@ -34,12 +34,13 @@ __pycache__/
 
 # C extensions
 *.so
+*.spec
 
 # Distribution / packaging
 .vscode
-.idea/
+.idea
 .Python
-build/
+build
 develop-eggs/
 dist/
 downloads/
