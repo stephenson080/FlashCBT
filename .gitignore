@@ -1,31 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@stephenson080 
-stephenson080
-/
-FlashCBT
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-FlashCBT/.gitignore
-@stephenson080
-stephenson080 Initial commit
-Latest commit 7d2be5d 14 seconds ago
- History
- 1 contributor
-129 lines (105 sloc)  1.76 KB
+
    
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -40,7 +13,7 @@ __pycache__/
 .vscode
 .idea
 .Python
-build
+build/
 develop-eggs/
 dist/
 downloads/

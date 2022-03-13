@@ -24,7 +24,7 @@ class BrowserWindow(QMainWindow):
 
     def __init__(self, *args):
         super(BrowserWindow, self).__init__()
-        self.window().setWindowIcon(QIcon(os.path.join(basedir, 'jamb-logo.ico')))
+        self.window().setWindowIcon(QIcon(os.path.join(basedir, 'assets/images/jamb-logo.ico')))
         self.setWindowFlag(Qt.WindowMaximizeButtonHint, False)
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl(*args))
@@ -37,12 +37,12 @@ class BrowserWindow(QMainWindow):
 
         self.zoom_in_btn = QAction("Zoom In", self)
         self.zoom_in_btn.triggered.connect(self.zoom_in)
-        self.zoom_in_btn.setIcon(QIcon(os.path.join(basedir, 'zoom-in.png')))
+        self.zoom_in_btn.setIcon(QIcon(os.path.join(basedir, 'assets/images/zoom-in.png')))
         nav_bar.addAction(self.zoom_in_btn)
 
         self.zoom_out_btn = QAction("Zoom Out", self)
         self.zoom_out_btn.triggered.connect(self.zoom_out)
-        self.zoom_out_btn.setIcon(QIcon(os.path.join(basedir, 'zoom-out.png')))
+        self.zoom_out_btn.setIcon(QIcon(os.path.join(basedir, 'assets/images/zoom-out.png')))
         nav_bar.addAction(self.zoom_out_btn)
 
     def zoom_in(self):
@@ -69,16 +69,16 @@ class StartWindow(QMainWindow):
 
     def __init__(self):
         super(StartWindow, self).__init__()
-        QFontDatabase.addApplicationFont(os.path.join(basedir, "Roboto-Bold.ttf"))
+        QFontDatabase.addApplicationFont(os.path.join(basedir, "assets/fonts/Roboto-Bold.ttf"))
 
         label_font = QFont("Roboto", 12)
         font = QFont("Roboto Lt", 10)
         self.browser_window = None
         self.setWindowFlag(Qt.WindowMaximizeButtonHint, False)
-        self.window().setWindowIcon(QIcon(os.path.join(basedir, 'jamb-logo.ico')))
+        self.window().setWindowIcon(QIcon(os.path.join(basedir, 'assets/images/jamb-logo.ico')))
 
         self.lab = QLabel(self)
-        pixmap = QPixmap(os.path.join(basedir, 'jamb-logo.png'))
+        pixmap = QPixmap(os.path.join(basedir, 'assets/images/jamb-logo.png'))
         self.lab.setPixmap(pixmap)
         self.lab.setFixedWidth(250)
         self.lab.setFixedHeight(250)
@@ -107,12 +107,23 @@ class StartWindow(QMainWindow):
         self.button.setFont(label_font)
         self.button.setStyleSheet("border: 1.5px solid darkgreen; background-color: darkgreen; color: white;  font-size: 15px; border-radius: 15px")
 
+        self.error = QLabel("Invalid IP Address", self)
+        self.error.setFixedWidth(500)
+        self.error.setFont(label_font)
+        self.error.hide()
+
         self.button.clicked.connect(self.navigate_to_url)
         self.url_bar.returnPressed.connect(self.navigate_to_url)
 
     def navigate_to_url(self):
-        url = "http://"
+        self.error.hide()
+        url = "9091"
         url_bar_text = self.url_bar.text()
+        if url_bar_text == '':
+            self.error.setStyleSheet("color: red")
+            self.error.move(170, 530)
+            self.error.show()
+            return
         main_url = url.__add__(url_bar_text)
         self.browser_window = BrowserWindow(main_url)
 
@@ -126,7 +137,7 @@ if app is not None:
     app.exit(1)
 
 app = QApplication(sys.argv)
-app.setWindowIcon(QIcon(os.path.join(basedir, 'jamb-logo.ico')))
+app.setWindowIcon(QIcon(os.path.join(basedir, 'assets/images/jamb-logo.ico')))
 QApplication.setApplicationName('FlashCBT Browser')
 window = StartWindow()
 window.show()
