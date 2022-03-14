@@ -117,14 +117,14 @@ class StartWindow(QMainWindow):
 
     def navigate_to_url(self):
         self.error.hide()
-        url = "9091"
+        url = "http://"
         url_bar_text = self.url_bar.text()
         if url_bar_text == '':
             self.error.setStyleSheet("color: red")
             self.error.move(170, 530)
             self.error.show()
             return
-        main_url = url.__add__(url_bar_text)
+        main_url = url.__add__(url_bar_text.__add__(':9091'))
         self.browser_window = BrowserWindow(main_url)
 
         self.browser_window.show()
